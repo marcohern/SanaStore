@@ -1,17 +1,22 @@
 <h2>Products</h2>
+<button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add</button>
 <table class='table'>
     <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of products">
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.price }}</td>
+        <tr *ngFor="let product of products; let i = index;">
+            <th>{{ product.id }}</th>
+            <td><a [routerLink]="['/product',product.id]">{{ product.name }}</a></td>
+            <td>{{ product.price | currency:USD:'symbol':'1.2-2' }}</td>
+            <td>
+                <button class="btn btn-danger"><i class="glyphicon glyphicon-remove" (click)="delete(product,i)"></i></button>
+            </td>
         </tr>
     </tbody>
 </table>

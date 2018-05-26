@@ -21,5 +21,18 @@ export class ProductsComponent implements OnInit {
         }, error => {
             console.error("PRODUCTS ERROR", error);
         });
+    }    
+
+    delete(product: Product, $index:number) {
+        var id = product.id;
+        console.log("delete", product, $index);
+        if (id) {
+            this.ps.delete(id).subscribe(result => {
+                console.log("PRODUCTS", result);
+                this.products.splice($index, 1);
+            }, error => {
+                console.error("PRODUCTS ERROR", error);
+            });
+        }
     }
 }

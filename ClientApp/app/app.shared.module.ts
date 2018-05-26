@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ProductComponent } from './components/product/product.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ResourceService } from './services/resource.service';
 import { RequestService } from './services/request.service';
@@ -23,6 +24,7 @@ import { ProductService } from './services/products.service';
         FetchDataComponent,
         HomeComponent,
         ProductsComponent,
+        ProductComponent,
         SettingsComponent
     ],
     imports: [
@@ -35,6 +37,7 @@ import { ProductService } from './services/products.service';
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'products', component: ProductsComponent },
+            { path: 'product/:id', component: ProductComponent },
             { path: 'settings', component: SettingsComponent },
             { path: '**', redirectTo: 'home' }
         ])
