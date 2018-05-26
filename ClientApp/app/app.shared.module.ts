@@ -15,6 +15,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ResourceService } from './services/resource.service';
 import { RequestService } from './services/request.service';
 import { ProductService } from './services/products.service';
+import { CategoriesService } from './services/categories.service';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { ProductService } from './services/products.service';
     providers: [
         RequestService,
         ResourceService,
-        ProductService
+        ProductService,
+        CategoriesService
     ]
 })
 export class AppModuleShared {

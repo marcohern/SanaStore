@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { Product } from '../models/product';
 import { ResourceService } from './resource.service';
 import { DmResult } from '../models/dm-result';
+import { Category } from '../models/category';
 
 @Injectable()
 export class ProductService {
@@ -24,8 +25,8 @@ export class ProductService {
             .map((r:Response) => <Product>r.json());
     }
 
-    public create(product: Product): Observable<DmResult> {
-        return this.res.create(ProductService.uri, product);
+    public create(product: Product, categories: Category[]): Observable<DmResult> {
+        return this.res.create(ProductService.uri, { product: product, categories:categories });
     }
 
     public update(id: number, product: Product): Observable<DmResult> {
