@@ -55,18 +55,22 @@ namespace SanaStore.Controllers
         [HttpPut("{id}")]
         public DmResult Put(int id, [FromBody]ProductExtended cp)
         {
-            var db = GetDatabase();
-            cp.Product.Id = id;
-            db.Products.Update(cp.Product);
-            var categories = db.ProductCategories.Where(pc => pc.ProductId == id).ToList();
-            db.ProductCategories.RemoveRange(categories);
-            cp.Categories.ForEach(c => db.ProductCategories.Add(new ProductCategory { ProductId = cp.Product.Id, CategoryId = c.Id }));
-            db.SaveChanges();
-            return new DmResult
+            using (var db = GetDatabase())
             {
-                Success = true,
-                Id = cp.Product.Id
-            };
+                var categories = db.ProductCategories.Where(pc => pc.ProductId == id).ToList();
+                db.ProductCategories.RemoveRange(categories);
+                db.SaveChanges();
+
+                cp.Product.Id = id;
+                db.Products.Update(cp.Product);
+                cp.Categories.ForEach(c => db.ProductCategories.Add(new ProductCategory { ProductId = cp.Product.Id, CategoryId = c.Id }));
+                db.SaveChanges();
+                return new DmResult
+                {
+                    Success = true,
+                    Id = cp.Product.Id
+                };
+            }
         }
 
         // DELETE: api/Products/5

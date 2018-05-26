@@ -26,11 +26,19 @@ export class ProductService {
     }
 
     public create(product: Product, categories: Category[]): Observable<DmResult> {
-        return this.res.create(ProductService.uri, { product: product, categories:categories });
+        return this.res.create(ProductService.uri, { product: product, categories: categories });
     }
 
-    public update(id: number, product: Product): Observable<DmResult> {
-        return this.res.update(ProductService.uri, id, product);
+    public update(id: number, product: Product, categories: Category[]): Observable<DmResult> {
+        return this.res.update(ProductService.uri, id, { product: product, categories: categories });
+    }
+
+    public save(product: Product, categories: Category[]): Observable<DmResult> {
+        if (product.id) {
+            return this.update(product.id, product, categories);
+        } else {
+            return this.create(product, categories);
+        }
     }
 
     public delete(id: number): Observable<DmResult> {

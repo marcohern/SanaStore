@@ -33,6 +33,12 @@ export class ProductComponent implements OnInit {
                 this.ps.get(id).subscribe(product => {
                     console.info("PRODUCT", product);
                     this.product = product;
+                    for (let pc of product.productCategories) {
+                        this.categories.forEach(c => {
+                            //c.selected = false;
+                            if (pc.categoryId == c.id) c.selected = true;
+                        });
+                    }
                     this.productFormGroup.setValue({
                         name: product.name,
                         price: product.price
@@ -65,8 +71,9 @@ export class ProductComponent implements OnInit {
             }
             this.product.name = this.productFormGroup.value.name;
             this.product.price = this.productFormGroup.value.price;
+            this.product.productCategories = [];
 
-            this.ps.create(this.product, activeCats).subscribe(result => {
+            this.ps.save(this.product, activeCats).subscribe(result => {
                 this.router.navigate(['/products']);
             }, error => {
                 console.error("CREATE PRODUCT ERROR", error);

@@ -23,7 +23,7 @@ export class ResourceService {
     }
 
     public update(uri: string, id: number, data: any): Observable<DmResult> {
-        return this.req.put(uri, data).map((r: Response) => <DmResult>r.json());
+        return this.req.put(uri + '/' + id, data).map((r: Response) => <DmResult>r.json());
     }
 
     public delete(uri: string, id: number): Observable<DmResult> {

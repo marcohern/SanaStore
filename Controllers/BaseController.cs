@@ -11,7 +11,7 @@ namespace SanaStore.Controllers
     public class BaseController : Controller
     {
         private static string sourceTypeSessId = "com.marcohern.sana.sourceType";
-        public SanaSourceSourceType GetSessionSourceType()
+        protected SanaSourceSourceType GetSessionSourceType()
         {
             if (!HttpContext.Session.Keys.Contains(sourceTypeSessId))
             {
@@ -20,11 +20,10 @@ namespace SanaStore.Controllers
             return (SanaSourceSourceType)this.HttpContext.Session.GetInt32(sourceTypeSessId);
         }
 
-        public void SetSessionSourceType(SanaSourceSourceType sourceType)
+        protected void SetSessionSourceType(SanaSourceSourceType sourceType)
         {
             HttpContext.Session.SetInt32(sourceTypeSessId, (int)sourceType);
         }
-
 
         protected SanaStoreContext GetDatabase()
         {

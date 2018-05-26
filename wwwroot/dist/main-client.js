@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c896f0b223b288325052"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5834b586c7649e5c76e4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -776,8 +776,16 @@ var ProductService = (function () {
     ProductService.prototype.create = function (product, categories) {
         return this.res.create(ProductService_1.uri, { product: product, categories: categories });
     };
-    ProductService.prototype.update = function (id, product) {
-        return this.res.update(ProductService_1.uri, id, product);
+    ProductService.prototype.update = function (id, product, categories) {
+        return this.res.update(ProductService_1.uri, id, { product: product, categories: categories });
+    };
+    ProductService.prototype.save = function (product, categories) {
+        if (product.id) {
+            return this.update(product.id, product, categories);
+        }
+        else {
+            return this.create(product, categories);
+        }
     };
     ProductService.prototype.delete = function (id) {
         return this.res.delete(ProductService_1.uri, id);
@@ -829,7 +837,7 @@ var ResourceService = (function () {
         return this.req.post(uri, data).map(function (r) { return r.json(); });
     };
     ResourceService.prototype.update = function (uri, id, data) {
-        return this.req.put(uri, data).map(function (r) { return r.json(); });
+        return this.req.put(uri + '/' + id, data).map(function (r) { return r.json(); });
     };
     ResourceService.prototype.delete = function (uri, id) {
         return this.req.delete(uri + '/' + id).map(function (r) { return r.json(); });
@@ -2110,6 +2118,17 @@ var ProductComponent = (function () {
                 _this.ps.get(id).subscribe(function (product) {
                     console.info("PRODUCT", product);
                     _this.product = product;
+                    var _loop_1 = function (pc) {
+                        _this.categories.forEach(function (c) {
+                            //c.selected = false;
+                            if (pc.categoryId == c.id)
+                                c.selected = true;
+                        });
+                    };
+                    for (var _i = 0, _a = product.productCategories; _i < _a.length; _i++) {
+                        var pc = _a[_i];
+                        _loop_1(pc);
+                    }
                     _this.productFormGroup.setValue({
                         name: product.name,
                         price: product.price
@@ -2142,7 +2161,8 @@ var ProductComponent = (function () {
             }
             this.product.name = this.productFormGroup.value.name;
             this.product.price = this.productFormGroup.value.price;
-            this.ps.create(this.product, activeCats).subscribe(function (result) {
+            this.product.productCategories = [];
+            this.ps.save(this.product, activeCats).subscribe(function (result) {
                 _this.router.navigate(['/products']);
             }, function (error) {
                 console.error("CREATE PRODUCT ERROR", error);
@@ -2652,7 +2672,7 @@ module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-invers
 /* 39 */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Product</h2>\r\n<form [formGroup]=\"productFormGroup\" (ngSubmit)=\"submit()\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-9\">\r\n            <label for=\"name\">Name</label>\r\n            <input id=\"name\" type=\"text\" class=\"form-control\" formControlName=\"name\" required />\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            <label for=\"price\">Price</label>\r\n            <input id=\"price\" type=\"number\" class=\"form-control\" formControlName=\"price\" required />\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\"><br />\r\n            <label>Categories:</label>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\" *ngFor=\"let category of categories\">\r\n            <div class=\"form-check\">\r\n                <input class=\"form-check-input\" type=\"checkbox\" value=\"{{category.id}}\" id=\"category_{{category.id}}\" (click)=\"toggle(category)\">\r\n                <label class=\"form-check-label\" for=\"category_{{category.id}}\">\r\n                    {{category.name}}\r\n                </label>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n            <button type=\"submit\" class=\"btn btn-primary\">Save</button>\r\n        </div>\r\n    </div>\r\n</form>";
+module.exports = "<h2>Product</h2>\r\n<form [formGroup]=\"productFormGroup\" (ngSubmit)=\"submit()\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-9\">\r\n            <label for=\"name\">Name</label>\r\n            <input id=\"name\" type=\"text\" class=\"form-control\" formControlName=\"name\" required />\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            <label for=\"price\">Price</label>\r\n            <input id=\"price\" type=\"number\" class=\"form-control\" formControlName=\"price\" required />\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\"><br />\r\n            <label>Categories:</label>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\" *ngFor=\"let category of categories\">\r\n            <div class=\"form-check\">\r\n                <input class=\"form-check-input\" type=\"checkbox\" value=\"{{category.id}}\" id=\"category_{{category.id}}\" [checked]=\"category.selected\" (click)=\"toggle(category)\">\r\n                <label class=\"form-check-label\" for=\"category_{{category.id}}\">\r\n                    {{category.name}}\r\n                </label>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n            <button type=\"submit\" class=\"btn btn-primary\">Save</button>\r\n        </div>\r\n    </div>\r\n</form>";
 
 /***/ }),
 /* 40 */
