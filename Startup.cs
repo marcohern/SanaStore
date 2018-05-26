@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using SanaStore.Dal;
+using SanaStore.Dal.Models;
 
 namespace SanaStore
 {
@@ -48,7 +49,10 @@ namespace SanaStore
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            SanaStoreContextOptionsFactory.ConnString = Configuration.GetConnectionString("DefaultConnection");
+            SanaStoreDatabase.ConnString = Configuration.GetConnectionString("DefaultConnection");
+
+            var ctx = SanaStoreDatabase.Get(SanaSourceSourceType.InMemory);
+            SanaStoreDatabase.AddSeedData(ctx);
 
             app.UseStaticFiles();
 

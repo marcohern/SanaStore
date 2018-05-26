@@ -32,7 +32,7 @@ namespace SanaStore.Controllers
         [HttpGet("[action]")]
         public Order GetCustomers()
         {
-            var db = SanaStoreDatabase.Get();
+            var db = SanaStoreDatabase.Get(SanaSourceSourceType.InMemory);
             var item = db.Orders.Where(o => o.Id == 1).Include(o => o.OrderDetails).ThenInclude(od => od.Product).FirstOrDefault();
             return item;
         }
