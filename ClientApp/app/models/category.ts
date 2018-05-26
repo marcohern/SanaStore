@@ -1,8 +1,7 @@
 ﻿import { ProductCategory } from "./product-category";
 
-export class Product {
-    id?:number;
-    name:string = '';
-    price: number = 0;
+export class Category {
+    id?: number;
+    name: string = '';
     productCategories: ProductCategory[] = [];
 }

@@ -1,1 +1,9 @@
 <h2>Product</h2>
+<form [formGroup]="productFormGroup" (ngSubmit)="submit()">
+    <div class="row">
+        <div class="col-md-12">
+            <label for="name">Name</label>
+            <input id="name" type="text" class="form-control" formControlName="name" required/>
+        </div>
+    </div>
+</form>

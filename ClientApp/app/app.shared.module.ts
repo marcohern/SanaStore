@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
@@ -31,12 +31,14 @@ import { ProductService } from './services/products.service';
         CommonModule,
         HttpModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'products', component: ProductsComponent },
+            { path: 'product', component: ProductComponent },
             { path: 'product/:id', component: ProductComponent },
             { path: 'settings', component: SettingsComponent },
             { path: '**', redirectTo: 'home' }

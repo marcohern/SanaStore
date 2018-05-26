@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SanaStore.Dal;
 using SanaStore.Dal.Models;
 
@@ -24,43 +25,47 @@ namespace SanaStore.Controllers
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public Product Get(int id)
         {
             using (var db = GetDatabase())
             {
-                return db.Products.Where(p => p.Id == id).First();
+                return db.Products.Where(p => p.Id == id).Include(p => p.ProductCategories).ThenInclude(pc => pc.Category).First();
             }
         }
         
         // POST: api/Products
         [HttpPost]
-        public DmResult Post([FromBody]Product product)
+        public DmResult Post([FromBody]ProductExtended cp)
         {
             using (var db = GetDatabase())
             {
-                db.Products.Add(product);
+                db.Products.Add(cp.Product);
+                cp.Categories.ForEach(c => db.ProductCategories.Add(new ProductCategory { ProductId = cp.Product.Id, CategoryId = c.Id }));
                 db.SaveChanges();
                 return new DmResult
                 {
                     Success = true,
-                    Id = product.Id
+                    Id = cp.Product.Id
                 };
             }
         }
         
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public DmResult Put(int id, [FromBody]Product product)
+        public DmResult Put(int id, [FromBody]ProductExtended cp)
         {
             var db = GetDatabase();
-            product.Id = id;
-            db.Products.Update(product);
+            cp.Product.Id = id;
+            db.Products.Update(cp.Product);
+            var categories = db.ProductCategories.Where(pc => pc.ProductId == id).ToList();
+            db.ProductCategories.RemoveRange(categories);
+            cp.Categories.ForEach(c => db.ProductCategories.Add(new ProductCategory { ProductId = cp.Product.Id, CategoryId = c.Id }));
             db.SaveChanges();
             return new DmResult
             {
                 Success = true,
-                Id = product.Id
+                Id = cp.Product.Id
             };
         }
 
@@ -71,6 +76,8 @@ namespace SanaStore.Controllers
             using (var db = GetDatabase())
             {
                 var product = db.Products.Where(p => p.Id == id).First();
+                var categories = db.ProductCategories.Where(pc => pc.ProductId == id).ToList();
+                db.ProductCategories.RemoveRange(categories);
                 db.Products.Remove(product);
                 db.SaveChanges();
                 return new DmResult
