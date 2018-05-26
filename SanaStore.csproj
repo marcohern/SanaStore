@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +22,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\models\dm-result.ts" />
+    <None Remove="ClientApp\app\models\product.ts" />
+    <None Remove="ClientApp\app\services\products.service.ts" />
+    <None Remove="ClientApp\app\services\request.service.ts" />
+    <None Remove="ClientApp\app\services\resource.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SanaStore.Dal\SanaStore.Dal.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\models\dm-result.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\product.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\products.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\request.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\resource.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

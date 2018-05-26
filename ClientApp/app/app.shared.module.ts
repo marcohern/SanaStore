@@ -11,6 +11,9 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ResourceService } from './services/resource.service';
+import { RequestService } from './services/request.service';
+import { ProductService } from './services/products.service';
 
 @NgModule({
     declarations: [
@@ -35,6 +38,11 @@ import { SettingsComponent } from './components/settings/settings.component';
             { path: 'settings', component: SettingsComponent },
             { path: '**', redirectTo: 'home' }
         ])
+    ],
+    providers: [
+        RequestService,
+        ResourceService,
+        ProductService
     ]
 })
 export class AppModuleShared {

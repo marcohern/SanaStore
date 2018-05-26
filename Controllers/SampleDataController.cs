@@ -10,7 +10,7 @@ using SanaStore.Dal.Models;
 namespace SanaStore.Controllers
 {
     [Route("api/[controller]")]
-    public class SampleDataController : Controller
+    public class SampleDataController : BaseController
     {
         private static string[] Summaries = new[]
         {
@@ -35,6 +35,20 @@ namespace SanaStore.Controllers
             var db = SanaStoreDatabase.Get(SanaSourceSourceType.InMemory);
             var item = db.Orders.Where(o => o.Id == 1).Include(o => o.OrderDetails).ThenInclude(od => od.Product).FirstOrDefault();
             return item;
+        }
+
+        [HttpGet("[action]")]
+        public DmResult SetInMomory()
+        {
+            SetSessionSourceType(SanaSourceSourceType.InMemory);
+            return new DmResult { Id = 0, Success = true };
+        }
+
+        [HttpGet("[action]")]
+        public DmResult SetSqlServer()
+        {
+            SetSessionSourceType(SanaSourceSourceType.SqlServer);
+            return new DmResult { Id = 0, Success = true };
         }
 
         public class WeatherForecast

@@ -27,10 +27,13 @@ namespace SanaStore
         {
             
             services.AddMvc()
+            .AddSessionStateTempDataProvider()
             .AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 //options.SerializerSettings.MaxDepth = 2;
             });
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +58,7 @@ namespace SanaStore
             SanaStoreDatabase.AddSeedData(ctx);
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
