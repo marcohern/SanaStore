@@ -1,10 +1,28 @@
 <h2>Settings</h2>
 <div class="row">
+    <div class="col-md-12">
+        <p>
+            Pick a Database Mode and click on Apply.
+            The Database Mode, also called Source Type, 
+            will be stored in the session. If the session 
+            expires, the mode will revert to it's default 
+            (<strong>SQL Server</strong>)
+        </p>
+        <p><strong>SQL Server</strong> mode interacts with a SQL database. </p>
+        <p><strong>In Memory</strong> mode stores data in the RAM. </p>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-4">
-        <select [(ngModel)]="mode" class="form-control">
-            <option value="1">SQL Server</option>
-            <option value="2">In Memory</option>
-        </select><br />
-        <button class="btn btn-primary" (click)="apply()"><i class="glyphicon glyphicon-save"></i> Apply</button>
+        <div class="alert alert-success">Database mode set to <strong *ngIf="mode">{{mode.name}}</strong></div>
+    </div>
+    <div class="col-md-4">
+        <label>Database Mode</label>
+        <select [(ngModel)]="modeval" class="form-control">
+            <option *ngFor="let m of modes" [value]="m.id">{{m.name}}</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-primary btn-lg" (click)="apply()"><i class="glyphicon glyphicon-save"></i> Apply</button><br /><br />
     </div>
 </div>
