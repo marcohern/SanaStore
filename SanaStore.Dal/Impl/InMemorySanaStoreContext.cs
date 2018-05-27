@@ -4,18 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SanaStore.Dal
+namespace SanaStore.Dal.Impl
 {
     public class InMemorySanaStoreContext : DbContext, ISanaStoreContext
     {
-        private static DbContextOptions<InMemorySanaStoreContext> GetOptions()
-        {
-            return new DbContextOptionsBuilder<InMemorySanaStoreContext>()
-                      .UseInMemoryDatabase("SanaStore")
-                      .Options;
-        }
-
-        public InMemorySanaStoreContext() : base(GetOptions())
+        public InMemorySanaStoreContext(DbContextOptions<InMemorySanaStoreContext> options) 
+            : base(options)
         {
 
         }
@@ -72,6 +66,8 @@ namespace SanaStore.Dal
                 new ProductCategory{ ProductId=6, CategoryId=2 },
                 new ProductCategory{ ProductId=6, CategoryId=3 },
             });
+
+            SaveChanges();
         }
     }
 }

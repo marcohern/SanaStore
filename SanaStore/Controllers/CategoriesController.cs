@@ -13,7 +13,7 @@ namespace SanaStore.Controllers
     [Route("api/Categories")]
     public class CategoriesController : BaseController
     {
-        public CategoriesController(IConfiguration configuration) : base(configuration)
+        public CategoriesController(IConfiguration configuration, IServiceProvider serviceProvider) : base(configuration,serviceProvider)
         {
 
         }

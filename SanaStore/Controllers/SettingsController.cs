@@ -13,7 +13,10 @@ namespace SanaStore.Controllers
     [Route("api/Settings")]
     public class SettingsController : BaseController
     {
-        public SettingsController(IConfiguration configuration) : base(configuration)
+        public SettingsController(
+            IConfiguration configuration,
+            IServiceProvider serviceProvider
+            ) : base(configuration, serviceProvider)
         {
 
         }

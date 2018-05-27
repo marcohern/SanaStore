@@ -15,7 +15,10 @@ namespace SanaStore.Controllers
     [Route("api/Products")]
     public class ProductsController : BaseController
     {
-        public ProductsController(IConfiguration configuration):base(configuration)
+        public ProductsController(
+            IConfiguration configuration,
+            IServiceProvider serviceProvider
+        ) : base(configuration, serviceProvider)
         {
 
         }

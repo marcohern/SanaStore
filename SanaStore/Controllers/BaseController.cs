@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using SanaStore.Dal.Impl;
 
 namespace SanaStore.Controllers
 {
@@ -14,11 +15,14 @@ namespace SanaStore.Controllers
         private static string sourceTypeSessId = "com.marcohern.sana.sourceType";
 
         protected IConfiguration Configuration;
+        protected IServiceProvider ServiceProvider;
 
-        public BaseController(IConfiguration configuration)
+        public BaseController(IConfiguration configuration, IServiceProvider serviceProvider)
         {
             this.Configuration = configuration;
+            this.ServiceProvider = serviceProvider;
         }
+
         protected SanaSourceSourceType GetSessionSourceType()
         {
             if (!HttpContext.Session.Keys.Contains(sourceTypeSessId))
@@ -39,9 +43,9 @@ namespace SanaStore.Controllers
             switch(sourceType)
             {
                 case SanaSourceSourceType.SqlServer:
-                    return new SqlServerSanaStoreContext(Configuration.GetConnectionString("DefaultConnection"));
+                    return (ISanaStoreContext)ServiceProvider.GetService(typeof(SqlServerSanaStoreContext));
                 case SanaSourceSourceType.InMemory:
-                    return new InMemorySanaStoreContext();
+                    return (ISanaStoreContext)ServiceProvider.GetService(typeof(InMemorySanaStoreContext));
                 default:
                     return null;
             }

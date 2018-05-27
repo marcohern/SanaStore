@@ -4,20 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SanaStore.Dal
+namespace SanaStore.Dal.Impl
 {
     public class SqlServerSanaStoreContext : DbContext, ISanaStoreContext
     {
 
-        private static DbContextOptions<SqlServerSanaStoreContext> GetOptions(string connString)
-        {
-            return new DbContextOptionsBuilder<SqlServerSanaStoreContext>()
-                      .UseSqlServer(connString)
-                      .Options;
-        }
-
-        public SqlServerSanaStoreContext(string connString)
-            : base(GetOptions(connString))
+        public SqlServerSanaStoreContext(DbContextOptions<SqlServerSanaStoreContext> options)
+            : base(options)
         {
 
         }
