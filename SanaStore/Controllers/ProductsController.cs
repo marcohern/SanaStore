@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SanaStore.Dal;
 using SanaStore.Dal.Models;
 
@@ -14,6 +15,10 @@ namespace SanaStore.Controllers
     [Route("api/Products")]
     public class ProductsController : BaseController
     {
+        public ProductsController(IConfiguration configuration):base(configuration)
+        {
+
+        }
         // GET: api/Products
         [HttpGet]
         public IEnumerable<Product> Get()

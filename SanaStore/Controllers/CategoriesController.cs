@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SanaStore.Dal.Models;
 
 namespace SanaStore.Controllers
@@ -12,6 +13,10 @@ namespace SanaStore.Controllers
     [Route("api/Categories")]
     public class CategoriesController : BaseController
     {
+        public CategoriesController(IConfiguration configuration) : base(configuration)
+        {
+
+        }
         // GET: api/Categories
         [HttpGet]
         public IEnumerable<Category> Get()
