@@ -18,11 +18,14 @@ To help you get started, we've also set up:
 - **Efficient production builds**. In production mode, development-time features are disabled, and the webpack build tool produces minified static CSS and JavaScript files.
 
 ## Instalation
+This app requires [Visual Studio 2017 Community Edition](https://www.visualstudio.com/downloads/). Youmay download it from [here](https://www.visualstudio.com/downloads/).
+
 To make sure that the application runs properly, first we must publish the database. SanaStore uses a SQL Server database by default to store data. The easiest way to create the database is done by using Visual Studio:
 
 1. Open the Solution **SanaStore.sln** (VS2017).
-2. From the Visual Studio 2017 interface, second-click on the Database project **SanaStore.Database** -> **Publicar** (My UI is in spanish, so please bare with me).
+2. From the Visual Studio 2017 interface, second-click on the Database project **SanaStore.Database** -> **Publicar** (My UI is in spanish, so please bear with me).
 3. In the **publicar base de datos** dialog, select the target Database by clicking on **Editar**, and pick the database. If no database connections are available, you must forst add one using **Explorador de Servicios** -> **Conexiones de datos**.
+
 ![alt text](https://raw.githubusercontent.com/marcohern/SanaStore/master/images/publishDb.edit.png "Publish Databae . Edit")
 
 4. After selecting the target connection, click on **Publicar**. This will begin the database creation process.
