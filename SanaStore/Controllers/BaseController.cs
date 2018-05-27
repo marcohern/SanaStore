@@ -12,7 +12,7 @@ namespace SanaStore.Controllers
 {
     public class BaseController : Controller
     {
-        private static string sourceTypeSessId = "com.marcohern.sana.sourceType";
+        private const string sourceTypeSessId = "com.marcohern.sana.sourceType";
 
         protected IConfiguration Configuration;
         protected IServiceProvider ServiceProvider;
