@@ -30,9 +30,9 @@ To make sure that the application runs properly, first we must publish the datab
 
 1. Open the Solution **SanaStore.sln** (VS2017).
 2. From the Visual Studio 2017 interface, second-click on the Database project **SanaStore.Database** -> **Publicar** (My UI is in spanish, so please bear with me).
-3. In the **publicar base de datos** dialog, select the target Database by clicking on **Editar**, and pick the database. If no database connections are available, you must forst add one using **Explorador de Servicios** -> **Conexiones de datos**.
+3. In the **publicar base de datos** dialog, select the target Database by clicking on **Editar**, and pick the database. If no database connections are available, you must first add one using **Explorador de Servicios** -> **Conexiones de datos**.
 
-![alt text](https://raw.githubusercontent.com/marcohern/SanaStore/master/images/publishDb.edit.png "Publish Databae . Edit")
+![alt text](https://raw.githubusercontent.com/marcohern/SanaStore/master/images/publishDb.edit.png "Publish Database . Edit")
 
 4. After selecting the target connection, click on **Publicar**. This will begin the database creation process.
 
@@ -50,7 +50,7 @@ To make sure that the application runs properly, first we must publish the datab
 
 ## Thoughts on this Project
 
-Sana Requested an MVC application, however I did build this using Angular, mostly because it is the focus of my research and I feel it makes the whole excersise better.
+Sana Requested an MVC application, however I did build this using Angular, mostly because it is the focus of my research and I feel it makes the whole excercise better.
 
 An interesting point of this project is the ability to switch between **In Memory** and **SQL Server** database in Run time. I have never used In Memory before, so this was by far the most challenging aspect, not because the implementation of In Memory (it is quite easy), but making sure it is possible to wsitch between the two sources using nothing but the available infrastructure. I implemented a simple form of Inversion of Control pattern, but I may not have had to since EntityFrameworkCore 2 has all those things covered. So I admit that there may have been a better way to achieve this. Nevertheless, it works. 
 
