@@ -52,10 +52,7 @@ namespace SanaStore
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            SanaStoreDatabase.ConnString = Configuration.GetConnectionString("DefaultConnection");
-
-            var ctx = SanaStoreDatabase.Get(SanaSourceSourceType.InMemory);
-            SanaStoreDatabase.AddSeedData(ctx);
+            new InMemorySanaStoreContext().AddSeedData();
 
             app.UseStaticFiles();
             app.UseSession();
