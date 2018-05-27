@@ -17,8 +17,14 @@ To help you get started, we've also set up:
 - **Hot module replacement**. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Angular app will be rebuilt and a new instance injected into the page.
 - **Efficient production builds**. In production mode, development-time features are disabled, and the webpack build tool produces minified static CSS and JavaScript files.
 
+## Database Design
+
+The Entity/Relation design diagram for the database has been specifically requested, so here it is. Should be self explanatory:
+
+![alt text](https://raw.githubusercontent.com/marcohern/SanaStore/master/images/dabase.design.png "Entity Relation Diagram")
+
 ## Instalation
-This app requires [Visual Studio 2017 Community Edition](https://www.visualstudio.com/downloads/). Youmay download it from [here](https://www.visualstudio.com/downloads/).
+This app requires [Visual Studio 2017 Community Edition](https://www.visualstudio.com/downloads/). You may download it from [here](https://www.visualstudio.com/downloads/).
 
 To make sure that the application runs properly, first we must publish the database. SanaStore uses a SQL Server database by default to store data. The easiest way to create the database is done by using Visual Studio:
 
