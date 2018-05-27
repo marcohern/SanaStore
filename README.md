@@ -10,7 +10,7 @@ SanaStore is built with:
 
 To help you get started, we've also set up:
 
-- **Client-side navigation**. For example, click Counter then Back to return here.
+- **Client-side navigation**. For example, click *Products* then *Back* to return here.
 - **Server-side prerendering**. For faster initial loading and improved SEO, your Angular app is prerendered on the server. The resulting HTML is then transferred to the browser where a client-side copy of the app takes over.
 - **Webpack dev middleware**. In development mode, there's no need to run the webpack build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.
 - **Hot module replacement**. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Angular app will be rebuilt and a new instance injected into the page.
