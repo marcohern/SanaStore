@@ -47,3 +47,9 @@ To make sure that the application runs properly, first we must publish the datab
 ![alt text](https://raw.githubusercontent.com/marcohern/SanaStore/master/images/connString.png "Connection String")
 
 6. Finally, click on the **> Ejecutar (IIS Express)** button to run the app.
+
+## Thoughts on this Project
+
+Sana Requested an MVC application, however I did build this using Angular, mostly because it is the focus of my research and I feel it makes the whole excersise better.
+
+An interesting point of this project is the ability to switch between **In Memory** and **SQL Server** database in Run time. I have never used In Memory before, so this was by far the most challenging aspect, not just the implementation of In Memory (it is quite easy), but making sure it is possible to wsitch between the two sources using nothing but the available infrastructure. I implemented a simple form of Inversion of Control pattern, but I may not have had to since EntityFrameworkCore 2 has all those things covered. So I admit that there may have been a better way to achieve this. Nevertheless, it works. 
